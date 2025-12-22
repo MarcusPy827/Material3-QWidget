@@ -5,6 +5,8 @@ set(LIB_SOURCES
   theme_loader/theme_loader.cc
   utils/utils.h
   utils/utils.cc
+  components/app_bar/app_bar.h
+  components/app_bar/app_bar.cc
 )
 
 add_library(Material3QWControl SHARED ${LIB_SOURCES})
