@@ -24,7 +24,31 @@
 namespace m3qw {
 namespace components {
 
-AppBar::AppBar(QWidget *parent, QString title): QWidget(parent) {
+AppBar::AppBar(QWidget *parent, AppBarConfig config): QWidget(parent) {
+  switch (config.size) {
+    case AppBarSize::kSmall: {
+      class_name_ = "app_bar_container_small";
+      break;
+    }
+
+    case AppBarSize::kMedium: {
+      class_name_ = "app_bar_container_medium";
+      break;
+    }
+
+    case AppBarSize::kLarge: {
+      class_name_ = "app_bar_container_large";
+      break;
+    }
+
+    default: {
+      qWarning() << "[M3QW] AppBar: Unknown AppBarSize provided."
+        << "Now defaulting to AppBarSize::kSmall...";
+      class_name_ = "app_bar_container_small";
+      break;
+    }
+  }
+
   auto * app_bar_container_layout_internal = new QHBoxLayout();
   app_bar_container_layout_internal->setContentsMargins(0, 0, 0, 0);
   app_bar_container_layout_internal->setSpacing(0);
@@ -57,12 +81,12 @@ AppBar::AppBar(QWidget *parent, QString title): QWidget(parent) {
 
   auto * title_label_internal = new QLabel();
   title_label_internal->setProperty("class", "app_bar_title_label");
-  title_label_internal->setText(title);
+  title_label_internal->setText(config.title);
   main_page_bar_layout->addWidget(title_label_internal);
 }
 
 AppBar::~AppBar() {
-  
+  qInfo() << "[M3QW Frontend] AppBar: App Bar is being deleted.";
 }
 
 QList<QWidget *> AppBar::ExportPointerForThemeLoader() {

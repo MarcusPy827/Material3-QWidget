@@ -24,16 +24,26 @@
 namespace m3qw {
 namespace components {
 
+enum class AppBarSize {
+  kSmall,
+  kMedium,
+  kLarge
+};
+
+struct AppBarConfig {
+  AppBarSize size = AppBarSize::kSmall;
+  QString title = "";
+};
+
 class AppBar: public QWidget {
   Q_OBJECT
 
  public:
-  explicit AppBar(QWidget *parent = nullptr, QString title = "");
+  explicit AppBar(QWidget *parent = nullptr, AppBarConfig config);
   ~AppBar();
-  QList<QWidget *> ExportPointerForThemeLoader();
 
  private:
-  QList<QWidget *> components_internal_;
+  QString class_name_;
 };
 
 }  // namespace components

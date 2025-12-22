@@ -37,15 +37,73 @@ struct StyleTuple {
 static QString GetAppBackground(interfaces::ColorPalette palette) {
   return utils::Utils::TemplateCat(
     QStringLiteral(R"""(
-    *[class='background_layer'] {
+      *[class='background_layer'] {
+          background: %t1%;
+      })"""), QList<QString>{palette.kBackground});
+}
+
+static QString GetSmallAppBarBaseStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_bar_container_small'] {
+        min-height: 64px;
+        max-height: 64px;
         background: %t1%;
-    })"""), QList<QString>{palette.kBackground});
+        border: none;
+        margin: 0px;
+        padding: 0px;
+      })"""), QList<QString>{palette.kSurfaceContainer});
+}
+
+static QString GetMediumAppBarBaseStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_bar_container_medium'] {
+        min-height: 112px;
+        max-height: 112px;
+        background: %t1%;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+      })"""), QList<QString>{palette.kSurfaceContainer});
+}
+
+static QString GetLargeAppBarBaseStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_bar_container_large'] {
+        min-height: 120px;
+        max-height: 120px;
+        background: %t1%;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+      })"""), QList<QString>{palette.kSurfaceContainer});
+}
+
+static QString GetAppBarTitleStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_bar_title_label'] {
+        color: %t1%;
+        font-size: 24px;
+        min-height: 24px;
+        max-height: 24px;
+      })"""), QList<QString>{palette.kOnSurface});
 }
 
 static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
   return {
-    GetAppBackground(conf.light),
+    GetAppBackground(conf.light)
+      + GetSmallAppBarBaseStyle(conf.light)
+      + GetMediumAppBarBaseStyle(conf.light)
+      + GetLargeAppBarBaseStyle(conf.light)
+      + GetAppBarTitleStyle(conf.light),
     GetAppBackground(conf.dark)
+      + GetSmallAppBarBaseStyle(conf.dark)
+      + GetMediumAppBarBaseStyle(conf.dark)
+      + GetLargeAppBarBaseStyle(conf.dark)
+      + GetAppBarTitleStyle(conf.dark)
   };
 }
 

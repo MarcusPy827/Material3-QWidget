@@ -36,6 +36,17 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
   background_layer->setProperty("class", "background_layer");
   this->setCentralWidget(background_layer);
 
+  auto * main_layout = new QVBoxLayout();
+  main_layout->setContentsMargins(0, 0, 0, 0);
+  main_layout->setSpacing(0);
+  main_layout->setAlignment(Qt::AlignTop);
+  background_layer->setLayout(main_layout);
+
+  // Set up app bar
+  components::AppBar * app_bar = new components::AppBar(this,
+    tr("Material3-QWidget Example"));
+  main_layout->addWidget(app_bar);
+
   // Initialize theme loader
   if (theme_loader_ == nullptr) {
     theme_loader_ = new m3qw::loader::ThemeLoader(background_layer,
