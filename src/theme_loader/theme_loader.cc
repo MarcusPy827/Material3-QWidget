@@ -24,13 +24,17 @@
 namespace m3qw {
 namespace loader {
 
-ThemeLoader::ThemeLoader(QList<QWidget *> targets, QWidget * parent) {
-  parent_widget_ = parent;
-  installed_components_.clear();
-  for (QWidget * target : targets) {
-    installed_components_.append(target);
+ThemeLoader::ThemeLoader(QWidget * base_layer, interfaces::ColorConfig
+    palette, QWidget * parent) {
+  if (base_layer == nullptr) {
+    qCritical() << "[M3QW] Theme Loader: No valid base layer."
+      << "Skipping loading styles...";
+    return;
   }
-  theme_map_ = GetThemeMap();
+
+  install_target_ = base_layer;
+  palette_conf_ = palette;
+  theme_map_ = GetThemeMap(palette_conf_);
   LoadThemeFromMap(IsDarkMode());
 
   connect(qApp->styleHints(), &QStyleHints::colorSchemeChanged, this,
@@ -42,44 +46,17 @@ ThemeLoader::ThemeLoader(QList<QWidget *> targets, QWidget * parent) {
 }
 
 ThemeLoader::~ThemeLoader() {
-  installed_components_.clear();
 }
 
 void ThemeLoader::LoadThemeFromMap(bool use_dark_mode) {
-  if (parent_widget_ != nullptr) {
+  if (install_target_ != nullptr) {
     qInfo() << "[M3QW Frontend] Theme Loader: Loading selector styles...";
-    parent_widget_->setStyleSheet(use_dark_mode ? GenerateSelectorStyle()
-      .dark_style : GenerateSelectorStyle().light_style);
+    install_target_->setStyleSheet(use_dark_mode ? theme_map_.dark_style :
+      theme_map_.light_style);
   } else {
     qCritical() << "[M3QW Frontend] Theme Loader: No parent widget"
       << "was specified during initialization. "
       << "Selector styles will not be loaded.";
-  }
-
-  for (auto * component : installed_components_) {
-    if (component == nullptr) {
-      qCritical() << "[M3QW Frontend] Theme Loader: Nullptr encountered."
-        << "Skipping loading style for current unknown component.";
-      continue;
-    }
-
-    const QString element_name = component->objectName();
-    qInfo() << "[M3QW Frontend] Theme Loader: Installing stylesheet for"
-      << "widget:" << element_name;
-    if (theme_map_.contains(element_name)) {
-      const StyleTuple styles = theme_map_.value(element_name);
-      if (use_dark_mode) {
-        component->setStyleSheet(styles.dark_style);
-        continue;
-      } else {
-        component->setStyleSheet(styles.light_style);
-        continue;
-      }
-    }
-
-    qWarning() << "[M3QW Frontend] Theme Loader: No style found for element:"
-      << element_name;
-    continue;
   }
 }
 

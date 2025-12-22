@@ -21,6 +21,8 @@
 #include <QMainWindow>
 #include <QCheckBox>
 
+#include <theme_loader/theme_loader.h>
+
 namespace m3qw {
 namespace examples {
 
@@ -32,7 +34,7 @@ class MainWindow: public QMainWindow {
   ~MainWindow();
 
  private:
-  
+  m3qw::loader::ThemeLoader * theme_loader_ = nullptr;
 };
 
 }  // namespace examples

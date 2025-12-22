@@ -1,5 +1,6 @@
 set(LIB_SOURCES
   interfaces/color_palette.h
+  theme_loader/default_palette.h
   theme_loader/theme_conf.h
   theme_loader/theme_loader.h
   theme_loader/theme_loader.cc

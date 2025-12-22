@@ -15,36 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_THEME_LOADER_THEME_LOADER_H_
-#define SRC_THEME_LOADER_THEME_LOADER_H_
+#ifndef SRC_THEME_LOADER_DEFAULT_PALETTE_H_
+#define SRC_THEME_LOADER_DEFAULT_PALETTE_H_
 
-#include <QObject>
-#include <QList>
-#include <QWidget>
-
-#include "theme_loader/theme_conf.h"
 #include "interfaces/color_palette.h"
 
 namespace m3qw {
 namespace loader {
 
-class ThemeLoader: public QObject {
-  Q_OBJECT
+interfaces::ColorPalette default_light_palette = {
+  "#F6FAFE",  // kBackground
+  "#EBEEF3",  // kSurfaceContainer
+  "#181C20",  // kOnSurface
+};
 
- public:
-  explicit ThemeLoader(QWidget * base_layer, interfaces::ColorConfig palette,
-    QWidget * parent = nullptr);
-  ~ThemeLoader();
-  void LoadThemeFromMap(bool use_dark_mode = false);
+interfaces::ColorPalette default_dark_palette = {
+  "#101417",  // kBackground
+  "#1C2024",  // kSurfaceContainer
+  "#DFE3E7",  // kOnSurface
+};
 
- private:
-  bool IsDarkMode();
-  QWidget * install_target_ = nullptr;
-  interfaces::ColorConfig palette_conf_;
-  StyleTuple theme_map_;
+interfaces::ColorConfig default_color_config = {
+  default_light_palette,
+  default_dark_palette
 };
 
 }  // namespace loader
 }  // namespace m3qw
 
-#endif  // SRC_THEME_LOADER_THEME_LOADER_H_
+#endif  // SRC_THEME_LOADER_DEFAULT_PALETTE_H_

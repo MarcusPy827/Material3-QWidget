@@ -34,12 +34,19 @@ struct StyleTuple {
   QString dark_style;
 };
 
-static QMap<QString, StyleTuple> GetThemeMap() {
-  return QMap<QString, StyleTuple>{};
+static QString GetAppBackground(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+    *[class='background_layer'] {
+        background: %t1%;
+    })"""), QList<QString>{palette.kBackground});
 }
 
-static StyleTuple GenerateSelectorStyle() {
-  return StyleTuple{};
+static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
+  return {
+    GetAppBackground(conf.light),
+    GetAppBackground(conf.dark)
+  };
 }
 
 }  // namespace loader
