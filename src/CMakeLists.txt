@@ -8,6 +8,8 @@ set(LIB_SOURCES
   utils/utils.cc
   components/app_bar/app_bar.h
   components/app_bar/app_bar.cc
+  components/buttons/icon_buttons.h
+  components/buttons/icon_buttons.cc
 )
 
 add_library(Material3QWControl SHARED ${LIB_SOURCES})
