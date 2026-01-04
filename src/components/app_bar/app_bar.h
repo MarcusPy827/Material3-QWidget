@@ -39,7 +39,7 @@ class AppBar: public QWidget {
   Q_OBJECT
 
  public:
-  explicit AppBar(QWidget *parent = nullptr, AppBarConfig config);
+  explicit AppBar(const AppBarConfig &config, QWidget *parent = nullptr);
   ~AppBar();
 
  private:

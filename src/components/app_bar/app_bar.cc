@@ -24,7 +24,7 @@
 namespace m3qw {
 namespace components {
 
-AppBar::AppBar(QWidget *parent, AppBarConfig config): QWidget(parent) {
+AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   switch (config.size) {
     case AppBarSize::kSmall: {
       class_name_ = "app_bar_container_small";
@@ -87,12 +87,6 @@ AppBar::AppBar(QWidget *parent, AppBarConfig config): QWidget(parent) {
 
 AppBar::~AppBar() {
   qInfo() << "[M3QW Frontend] AppBar: App Bar is being deleted.";
-}
-
-QList<QWidget *> AppBar::ExportPointerForThemeLoader() {
-  QList<QWidget *> result;
-  result.append(this);
-  return result;
 }
 
 }  // namespace components

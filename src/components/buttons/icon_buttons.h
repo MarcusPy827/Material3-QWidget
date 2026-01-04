@@ -25,7 +25,7 @@ namespace m3qw {
 namespace components {
 
 struct IconButtonConfig {
-	QString icon_path = "";
+  QString icon_path = "";
 };
 
 class IconButton: public QToolButton {

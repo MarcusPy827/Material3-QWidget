@@ -43,8 +43,11 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
   background_layer->setLayout(main_layout);
 
   // Set up app bar
-  components::AppBar * app_bar = new components::AppBar(this,
-    tr("Material3-QWidget Example"));
+  const auto & app_bar_config = components::AppBarConfig{
+    .size = components::AppBarSize::kMedium,
+    .title = tr("Material3-QWidget Example")
+  };
+  components::AppBar * app_bar = new components::AppBar(app_bar_config, this);
   main_layout->addWidget(app_bar);
 
   // Initialize theme loader

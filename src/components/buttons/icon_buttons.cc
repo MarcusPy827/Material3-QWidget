@@ -24,5 +24,7 @@ IconButton::IconButton(QWidget *parent): QToolButton(parent) {
   this->setProperty("class", class_name_);
 }
 
+IconButton::~IconButton() {}
+
 }  // namespace components
 }  // namespace m3qw
