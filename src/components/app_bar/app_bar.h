@@ -25,6 +25,7 @@ namespace m3qw {
 namespace components {
 
 enum class AppBarSize {
+  kSearch,
   kSmall,
   kMedium,
   kLarge

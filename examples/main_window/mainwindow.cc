@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
   // Set up app bar
   const auto & app_bar_config = components::AppBarConfig{
-    .size = components::AppBarSize::kMedium,
+    .size = components::AppBarSize::kSmall,
     .title = tr("Material3-QWidget Example")
   };
   components::AppBar * app_bar = new components::AppBar(app_bar_config, this);

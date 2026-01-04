@@ -42,6 +42,19 @@ static QString GetAppBackground(interfaces::ColorPalette palette) {
       })"""), QList<QString>{palette.kBackground});
 }
 
+static QString GetSearchAppBarBaseStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_bar_container_search'] {
+        min-height: 64px;
+        max-height: 64px;
+        background: %t1%;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+      })"""), QList<QString>{palette.kSurfaceContainer});
+}
+
 static QString GetSmallAppBarBaseStyle(interfaces::ColorPalette palette) {
   return utils::Utils::TemplateCat(
     QStringLiteral(R"""(
@@ -87,19 +100,21 @@ static QString GetAppBarTitleStyle(interfaces::ColorPalette palette) {
       QWidget[class='app_bar_title_label'] {
         color: %t1%;
         font-size: 24px;
-        min-height: 24px;
-        max-height: 24px;
+        min-height: 32px;
+        max-height: 32px;
       })"""), QList<QString>{palette.kOnSurface});
 }
 
 static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
   return {
     GetAppBackground(conf.light)
+      + GetSearchAppBarBaseStyle(conf.light)
       + GetSmallAppBarBaseStyle(conf.light)
       + GetMediumAppBarBaseStyle(conf.light)
       + GetLargeAppBarBaseStyle(conf.light)
       + GetAppBarTitleStyle(conf.light),
     GetAppBackground(conf.dark)
+      + GetSearchAppBarBaseStyle(conf.dark)
       + GetSmallAppBarBaseStyle(conf.dark)
       + GetMediumAppBarBaseStyle(conf.dark)
       + GetLargeAppBarBaseStyle(conf.dark)

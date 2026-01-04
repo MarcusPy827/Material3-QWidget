@@ -26,6 +26,11 @@ namespace components {
 
 AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   switch (config.size) {
+    case AppBarSize::kSearch: {
+      class_name_ = "app_bar_container_search";
+      break;
+    }
+
     case AppBarSize::kSmall: {
       class_name_ = "app_bar_container_small";
       break;
@@ -48,6 +53,7 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
       break;
     }
   }
+  setProperty("class", class_name_);
 
   auto * app_bar_container_layout_internal = new QHBoxLayout();
   app_bar_container_layout_internal->setContentsMargins(0, 0, 0, 0);
@@ -55,7 +61,7 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   this->setLayout(app_bar_container_layout_internal);
 
   auto * app_bar_widget_internal = new QWidget();
-  app_bar_widget_internal->setProperty("class", "app_bar_container");
+  app_bar_widget_internal->setProperty("class", class_name_);
   app_bar_container_layout_internal->addWidget(app_bar_widget_internal);
 
   auto * app_bar_layout_internal = new QVBoxLayout();
