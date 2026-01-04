@@ -1,2 +1,6 @@
 # Build files
 build/*
+
+# Docs dependency and autogen
+docs/node_modules/*
+docs/.react-router/*
