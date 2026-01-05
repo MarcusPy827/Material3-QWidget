@@ -56,10 +56,21 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   }
   this->setProperty("class", class_name_);
 
+  auto * app_bar_container_layout_internal = new QHBoxLayout();
+  app_bar_container_layout_internal->setContentsMargins(0, 0, 0, 0);
+  app_bar_container_layout_internal->setSpacing(0);
+  this->setLayout(app_bar_container_layout_internal);
+
+  auto * app_bar_background_layer_internal = new QWidget();
+  app_bar_background_layer_internal->setProperty("class", class_name_);
+  app_bar_container_layout_internal->addWidget(
+    app_bar_background_layer_internal);
+
   auto * app_bar_container_multirow_layout_internal = new QVBoxLayout();
   app_bar_container_multirow_layout_internal->setContentsMargins(0, 0, 0, 0);
   app_bar_container_multirow_layout_internal->setSpacing(0);
-  this->setLayout(app_bar_container_multirow_layout_internal);
+  app_bar_background_layer_internal->setLayout(
+    app_bar_container_multirow_layout_internal);
 
   auto * app_bar_row_1_internal = new QHBoxLayout();
   if (config.leading_icon_btn == nullptr) {
