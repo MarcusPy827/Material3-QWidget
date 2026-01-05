@@ -16,11 +16,14 @@
  */
 
 #include "components/app_bar/app_bar_icon_btn.h"
+
 namespace m3qw {
 namespace components {
 
-AppBarIconBtn::AppBarIconBtn(QWidget *parent): QToolButton(parent) {
+AppBarIconBtn::AppBarIconBtn(const AppBarIconBtnConfig &config, QWidget *
+    parent): QToolButton(parent) {
   class_name_ = "app_bar_icon_button";
+  this->setFixedSize(QSize(48, 48));
   this->setProperty("class", class_name_);
 }
 

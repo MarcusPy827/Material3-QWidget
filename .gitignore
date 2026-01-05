@@ -1,6 +1,11 @@
 # Build files
 build/*
+src/build/*
 
 # Docs dependency and autogen
 docs/node_modules/*
 docs/.react-router/*
+
+# IDE config files
+.qtcreator/*
+src/.qtcreator/*

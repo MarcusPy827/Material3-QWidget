@@ -32,7 +32,8 @@ class AppBarIconBtn: public QToolButton {
   Q_OBJECT
 
  public:
-  explicit AppBarIconBtn(QWidget *parent = nullptr);
+  explicit AppBarIconBtn(const AppBarIconBtnConfig &config, QWidget *parent =
+    nullptr);
   ~AppBarIconBtn();
 
  private:

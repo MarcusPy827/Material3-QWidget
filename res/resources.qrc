@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/m3qw/fonts">
+    <file>fonts/material-symbols/material_symbol_sharp.ttf</file>
+    <file>fonts/material-symbols/material_symbol_rounded.ttf</file>
+    <file>fonts/material-symbols/material_symbol_outlined.ttf</file>
+  </qresource>
+</RCC>

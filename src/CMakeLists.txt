@@ -12,6 +12,12 @@ set(LIB_SOURCES
   components/app_bar/app_bar_icon_btn.cc
   components/buttons/icon_buttons.h
   components/buttons/icon_buttons.cc
+  font_loader/font_loader.h
+  font_loader/font_loader.cc
+)
+
+qt_add_resources(LIB_SOURCES
+  ${CMAKE_SOURCE_DIR}/../res/resources.qrc
 )
 
 add_library(Material3QWControl SHARED ${LIB_SOURCES})
