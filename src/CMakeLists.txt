@@ -8,6 +8,8 @@ set(LIB_SOURCES
   utils/utils.cc
   components/app_bar/app_bar.h
   components/app_bar/app_bar.cc
+  components/app_bar/app_bar_icon_btn.h
+  components/app_bar/app_bar_icon_btn.cc
   components/buttons/icon_buttons.h
   components/buttons/icon_buttons.cc
 )

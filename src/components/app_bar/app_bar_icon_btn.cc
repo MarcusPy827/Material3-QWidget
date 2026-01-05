@@ -15,42 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_APP_BAR_APP_BAR_H_
-#define SRC_COMPONENTS_APP_BAR_APP_BAR_H_
-
-#include <QWidget>
-#include <QList>
-
 #include "components/app_bar/app_bar_icon_btn.h"
-
 namespace m3qw {
 namespace components {
 
-enum class AppBarSize {
-  kSearch,
-  kSmall,
-  kMedium,
-  kLarge
-};
+AppBarIconBtn::AppBarIconBtn(QWidget *parent): QToolButton(parent) {
+  class_name_ = "app_bar_icon_button";
+  this->setProperty("class", class_name_);
+}
 
-struct AppBarConfig {
-  AppBarSize size = AppBarSize::kSmall;
-  AppBarIconBtn * leading_icon_btn = nullptr;
-  QString title = "";
-};
-
-class AppBar: public QWidget {
-  Q_OBJECT
-
- public:
-  explicit AppBar(const AppBarConfig &config, QWidget *parent = nullptr);
-  ~AppBar();
-
- private:
-  QString class_name_;
-};
+AppBarIconBtn::~AppBarIconBtn() {}
 
 }  // namespace components
 }  // namespace m3qw
-
-#endif  // SRC_COMPONENTS_APP_BAR_APP_BAR_H_

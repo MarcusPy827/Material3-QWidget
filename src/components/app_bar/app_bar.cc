@@ -18,6 +18,7 @@
 #include <QHBoxLayout>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QSpacerItem>
 
 #include "components/app_bar/app_bar.h"
 
@@ -53,42 +54,35 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
       break;
     }
   }
-  setProperty("class", class_name_);
+  this->setProperty("class", class_name_);
 
-  auto * app_bar_container_layout_internal = new QHBoxLayout();
-  app_bar_container_layout_internal->setContentsMargins(0, 0, 0, 0);
-  app_bar_container_layout_internal->setSpacing(0);
-  this->setLayout(app_bar_container_layout_internal);
+  auto * app_bar_container_multirow_layout_internal = new QVBoxLayout();
+  app_bar_container_multirow_layout_internal->setContentsMargins(0, 0, 0, 0);
+  app_bar_container_multirow_layout_internal->setSpacing(0);
+  this->setLayout(app_bar_container_multirow_layout_internal);
 
-  auto * app_bar_widget_internal = new QWidget();
-  app_bar_widget_internal->setProperty("class", class_name_);
-  app_bar_container_layout_internal->addWidget(app_bar_widget_internal);
+  auto * app_bar_row_1_internal = new QHBoxLayout();
+  if (config.leading_icon_btn == nullptr) {
+    app_bar_row_1_internal->setContentsMargins(16, 0, 4, 0);
+  } else {
+    app_bar_row_1_internal->setContentsMargins(4, 0, 4, 0);
+  }
+  app_bar_row_1_internal->setSpacing(0);
+  app_bar_row_1_internal->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+  app_bar_container_multirow_layout_internal->addLayout(
+    app_bar_row_1_internal);
 
-  auto * app_bar_layout_internal = new QVBoxLayout();
-  app_bar_layout_internal->setContentsMargins(0, 0, 0, 0);
-  app_bar_widget_internal->setLayout(app_bar_layout_internal);
-
-  auto * app_bar_stack_container_internal = new QStackedWidget();
-  app_bar_stack_container_internal->setContentsMargins(0, 0, 0, 0);
-  app_bar_container_layout_internal->layout()->setContentsMargins(0, 0, 0, 0);
-  app_bar_stack_container_internal->setProperty("class", "app_bar_container");
-  app_bar_layout_internal->addWidget(app_bar_stack_container_internal);
-
-  auto * main_page_bar_container = new QWidget();
-  main_page_bar_container->setProperty("class", "app_bar_container");
-  main_page_bar_container->setContentsMargins(0, 0, 0, 0);
-  app_bar_stack_container_internal->insertWidget(0,
-    main_page_bar_container);
-
-  auto * main_page_bar_layout = new QHBoxLayout();
-  main_page_bar_layout->setContentsMargins(24, 0, 24, 0);
-  main_page_bar_layout->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-  main_page_bar_container->setLayout(main_page_bar_layout);
+  if (config.leading_icon_btn != nullptr) {
+    app_bar_row_1_internal->addWidget(config.leading_icon_btn);
+    QSpacerItem * leading_icon_btn_padding = new QSpacerItem(4, 48,
+      QSizePolicy::Fixed, QSizePolicy::Fixed);
+    app_bar_row_1_internal->addSpacerItem(leading_icon_btn_padding);
+  }
 
   auto * title_label_internal = new QLabel();
   title_label_internal->setProperty("class", "app_bar_title_label");
   title_label_internal->setText(config.title);
-  main_page_bar_layout->addWidget(title_label_internal);
+  app_bar_row_1_internal->addWidget(title_label_internal);
 }
 
 AppBar::~AppBar() {
