@@ -51,10 +51,18 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
   components::AppBarIconBtn * app_bar_menu_icon_btn = new
     components::AppBarIconBtn(app_bar_menu_icon_btn_config, nullptr);
 
+  const auto & app_bar_more_icon_config = components::AppBarIconBtnConfig{
+    .icon_name = "more_vert",
+    .icon_variant = utils::IconVariant::kRounded
+  };
+  components::AppBarIconBtn * app_bar_more_icon_btn = new
+    components::AppBarIconBtn(app_bar_more_icon_config, nullptr);
+  
   const auto & app_bar_config = components::AppBarConfig{
     .size = components::AppBarSize::kSmall,
     .leading_icon_btn = app_bar_menu_icon_btn,
-    .title = tr("Material3-QWidget Example")
+    .title = tr("Material3-QWidget Example"),
+    .trailing_icon_btns = {app_bar_more_icon_btn}
   };
   components::AppBar * app_bar = new components::AppBar(app_bar_config, this);
   main_layout->addWidget(app_bar);
