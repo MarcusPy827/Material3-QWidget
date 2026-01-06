@@ -16,15 +16,40 @@
  */
 
 #include "components/app_bar/app_bar_icon_btn.h"
+#include "font_loader/font_loader.h"
 
 namespace m3qw {
 namespace components {
 
 AppBarIconBtn::AppBarIconBtn(const AppBarIconBtnConfig &config, QWidget *
     parent): QToolButton(parent) {
-  class_name_ = "app_bar_icon_button";
   this->setFixedSize(QSize(48, 48));
-  this->setProperty("class", class_name_);
+  this->setProperty("class", "app_bar_icon_button");
+  this->setText(config.icon_name);
+
+  switch (config.icon_variant) {
+    case utils::IconVariant::kOutlined: {
+      this->setFont(loader::FontLoader::GetOutlinedMaterialSymbolFont());
+      break;
+    }
+
+    case utils::IconVariant::kRounded: {
+      this->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
+      break;
+    }
+
+    case utils::IconVariant::kSharp: {
+      this->setFont(loader::FontLoader::GetSharpMaterialSymbolFont());
+      break;
+    }
+
+    default: {
+      qWarning() << "[WARN] AppBarIconBtn: Unknown IconVariant provided."
+        << "Now defaulting to rounded...";
+      this->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
+      break;
+    }
+  }
 }
 
 AppBarIconBtn::~AppBarIconBtn() {}

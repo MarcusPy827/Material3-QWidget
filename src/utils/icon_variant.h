@@ -15,26 +15,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_UTILS_UTILS_H_
-#define SRC_UTILS_UTILS_H_
+#ifndef SRC_UTILS_ICON_VARIANT_H_
+#define SRC_UTILS_ICON_VARIANT_H_
 
-#include <QStringLiteral>
-#include <QString>
-#include <QList>
+#include <QMainWindow>
+#include <QCheckBox>
+
+#include <theme_loader/theme_loader.h>
 
 namespace m3qw {
 namespace utils {
 
-class Utils {
- public:
-  static QString TemplateCat(QString original,
-    QList<QString> args = QList<QString>());
-
-  static QString ApplyOpacityToHexColor(const QString& hex,
-    const double & opacity);
+enum class IconVariant {
+  kOutlined,
+  kRounded,
+  kSharp
 };
 
 }  // namespace utils
 }  // namespace m3qw
 
-#endif  // SRC_UTILS_UTILS_H_
+#endif  // SRC_UTILS_ICON_VARIANT_H_

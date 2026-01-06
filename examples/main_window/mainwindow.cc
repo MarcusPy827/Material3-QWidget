@@ -19,6 +19,7 @@
 #include <QSize>
 
 #include <components/app_bar/app_bar.h>
+#include <components/app_bar/app_bar_icon_btn.h>
 #include <theme_loader/default_palette.h>
 
 #include "main_window/mainwindow.h"
@@ -43,8 +44,16 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
   background_layer->setLayout(main_layout);
 
   // Set up app bar
+  const auto & app_bar_menu_icon_btn_config = components::AppBarIconBtnConfig{
+    .icon_name = "menu",
+    .icon_variant = utils::IconVariant::kRounded
+  };
+  components::AppBarIconBtn * app_bar_menu_icon_btn = new
+    components::AppBarIconBtn(app_bar_menu_icon_btn_config, nullptr);
+
   const auto & app_bar_config = components::AppBarConfig{
     .size = components::AppBarSize::kSmall,
+    .leading_icon_btn = app_bar_menu_icon_btn,
     .title = tr("Material3-QWidget Example")
   };
   components::AppBar * app_bar = new components::AppBar(app_bar_config, this);

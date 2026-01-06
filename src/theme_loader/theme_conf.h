@@ -105,6 +105,30 @@ static QString GetAppBarTitleStyle(interfaces::ColorPalette palette) {
       })"""), QList<QString>{palette.kOnSurface});
 }
 
+static QString GetAppBarIconBtnStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QToolButton[class='app_bar_icon_button'] {
+        color: %t1%;
+        background: transparent;
+        height: 48px;
+        width: 48px;
+        border: 0px solid #ffffff;
+        border-radius: 24px;
+        font-size: 24px;
+      }
+        
+      QToolButton[class='app_bar_icon_button']:hover {
+        background: %t2%;
+      }
+        
+      QToolButton[class='app_bar_icon_button']:pressed {
+        background: %t3%;
+      })"""), QList<QString>{palette.kOnSurface,
+      utils::Utils::ApplyOpacityToHexColor(palette.kOnSurface, 0.08),
+      utils::Utils::ApplyOpacityToHexColor(palette.kOnSurface, 0.1)});
+}
+
 static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
   return {
     GetAppBackground(conf.light)
@@ -112,13 +136,15 @@ static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
       + GetSmallAppBarBaseStyle(conf.light)
       + GetMediumAppBarBaseStyle(conf.light)
       + GetLargeAppBarBaseStyle(conf.light)
-      + GetAppBarTitleStyle(conf.light),
+      + GetAppBarTitleStyle(conf.light)
+      + GetAppBarIconBtnStyle(conf.light),
     GetAppBackground(conf.dark)
       + GetSearchAppBarBaseStyle(conf.dark)
       + GetSmallAppBarBaseStyle(conf.dark)
       + GetMediumAppBarBaseStyle(conf.dark)
       + GetLargeAppBarBaseStyle(conf.dark)
       + GetAppBarTitleStyle(conf.dark)
+      + GetAppBarIconBtnStyle(conf.dark)
   };
 }
 

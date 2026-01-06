@@ -21,11 +21,14 @@
 #include <QWidget>
 #include <QToolButton>
 
+#include "utils/icon_variant.h"
+
 namespace m3qw {
 namespace components {
 
 struct AppBarIconBtnConfig {
   QString icon_name = "";
+  utils::IconVariant icon_variant = utils::IconVariant::kRounded;
 };
 
 class AppBarIconBtn: public QToolButton {

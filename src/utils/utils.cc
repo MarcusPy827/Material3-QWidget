@@ -15,6 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <QColor>
+#include <QDebug>
+
 #include "utils/utils.h"
 
 namespace m3qw {
@@ -28,6 +31,25 @@ QString Utils::TemplateCat(QString original, QList<QString> args) {
     original.replace(current_template_placeholder, current_arg);
   }
   return original;
+}
+
+QString Utils::ApplyOpacityToHexColor(const QString& hex,
+    const double & opacity) {
+  QColor color(hex);
+  if (color.isValid()) {
+    int r = color.red();
+    int g = color.green();
+    int b = color.blue();
+
+    return TemplateCat(QStringLiteral(R"""(rgba(%t1%, %t2%, %t3%, %t4%))"""),
+      QList<QString>{
+        QString::number(r), QString::number(g), QString::number(b),
+        QString::number(opacity)});
+  } else {
+    qCritical() << "[ERROR] Hex color util: Cannot apply opacity to hex color"
+      << hex << "as it is invalid, no action taken.";
+    return hex;
+  }
 }
 
 }  // namespace utils
