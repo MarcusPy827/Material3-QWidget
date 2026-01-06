@@ -9,3 +9,6 @@ docs/.react-router/*
 # IDE config files
 .qtcreator/*
 src/.qtcreator/*
+
+# Cache
+.cache/*

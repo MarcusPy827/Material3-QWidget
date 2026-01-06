@@ -74,9 +74,17 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
 
   auto * app_bar_row_1_internal = new QHBoxLayout();
   if (config.leading_icon_btn == nullptr) {
-    app_bar_row_1_internal->setContentsMargins(16, 0, 4, 0);
+    if (config.trailing_icon_btns.isEmpty()) {
+      app_bar_row_1_internal->setContentsMargins(16, 0, 16, 0);
+    } else {
+      app_bar_row_1_internal->setContentsMargins(16, 0, 4, 0);
+    }
   } else {
-    app_bar_row_1_internal->setContentsMargins(4, 0, 4, 0);
+    if (config.trailing_icon_btns.isEmpty()) {
+      app_bar_row_1_internal->setContentsMargins(4, 0, 16, 0);
+    } else {
+      app_bar_row_1_internal->setContentsMargins(4, 0, 4, 0);
+    }
   }
   app_bar_row_1_internal->setSpacing(0);
   app_bar_row_1_internal->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -94,6 +102,16 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   title_label_internal->setProperty("class", "app_bar_title_label");
   title_label_internal->setText(config.title);
   app_bar_row_1_internal->addWidget(title_label_internal);
+
+  QSpacerItem * title_trailing_spacer_internal = new QSpacerItem(48, 48,
+    QSizePolicy::Expanding, QSizePolicy::Fixed);
+  app_bar_row_1_internal->addSpacerItem(title_trailing_spacer_internal);
+
+  if (!config.trailing_icon_btns.isEmpty()) {
+    for (auto * btn : config.trailing_icon_btns) {
+      app_bar_row_1_internal->addWidget(btn);
+    }
+  }
 }
 
 AppBar::~AppBar() {

@@ -37,6 +37,7 @@ struct AppBarConfig {
   AppBarSize size = AppBarSize::kSmall;
   AppBarIconBtn * leading_icon_btn = nullptr;
   QString title = "";
+  QList<AppBarIconBtn *> trailing_icon_btns = {};
 };
 
 class AppBar: public QWidget {
