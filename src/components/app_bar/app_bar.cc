@@ -26,7 +26,8 @@ namespace m3qw {
 namespace components {
 
 AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
-  switch (config.size) {
+  config_ = config;
+  switch (config_.size) {
     case AppBarSize::kSearch: {
       class_name_ = "app_bar_container_search";
       break;
@@ -73,14 +74,14 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
     app_bar_container_multirow_layout_internal);
 
   auto * app_bar_row_1_internal = new QHBoxLayout();
-  if (config.leading_icon_btn == nullptr) {
-    if (config.trailing_icon_btns.isEmpty()) {
+  if (config_.leading_icon_btn == nullptr) {
+    if (config_.trailing_icon_btns.isEmpty()) {
       app_bar_row_1_internal->setContentsMargins(16, 0, 16, 0);
     } else {
       app_bar_row_1_internal->setContentsMargins(16, 0, 4, 0);
     }
   } else {
-    if (config.trailing_icon_btns.isEmpty()) {
+    if (config_.trailing_icon_btns.isEmpty()) {
       app_bar_row_1_internal->setContentsMargins(4, 0, 16, 0);
     } else {
       app_bar_row_1_internal->setContentsMargins(4, 0, 4, 0);
@@ -91,8 +92,8 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   app_bar_container_multirow_layout_internal->addLayout(
     app_bar_row_1_internal);
 
-  if (config.leading_icon_btn != nullptr) {
-    app_bar_row_1_internal->addWidget(config.leading_icon_btn);
+  if (config_.leading_icon_btn != nullptr) {
+    app_bar_row_1_internal->addWidget(config_.leading_icon_btn);
     QSpacerItem * leading_icon_btn_padding = new QSpacerItem(4, 48,
       QSizePolicy::Fixed, QSizePolicy::Fixed);
     app_bar_row_1_internal->addSpacerItem(leading_icon_btn_padding);
@@ -100,8 +101,8 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
 
   auto * title_label_internal = new QLabel();
   title_label_internal->setProperty("class", "app_bar_title_label");
-  title_label_internal->setText(config.title);
-  if (config.size != AppBarSize::kSmall) {
+  title_label_internal->setText(config_.title);
+  if (config_.size != AppBarSize::kSmall) {
     title_label_internal->hide();
   }
   app_bar_row_1_internal->addWidget(title_label_internal);
@@ -110,8 +111,8 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
     QSizePolicy::Expanding, QSizePolicy::Fixed);
   app_bar_row_1_internal->addSpacerItem(title_trailing_spacer_internal);
 
-  if (!config.trailing_icon_btns.isEmpty()) {
-    for (auto * btn : config.trailing_icon_btns) {
+  if (!config_.trailing_icon_btns.isEmpty()) {
+    for (auto * btn : config_.trailing_icon_btns) {
       app_bar_row_1_internal->addWidget(btn);
     }
   }
@@ -120,7 +121,7 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   app_bar_row_2_internal->setContentsMargins(16, 0, 16, 0);
   app_bar_row_2_internal->setSpacing(0);
   app_bar_row_2_internal->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-  if (config.size == AppBarSize::kMedium || config.size ==
+  if (config_.size == AppBarSize::kMedium || config_.size ==
       AppBarSize::kLarge) {
     app_bar_container_multirow_layout_internal->addLayout(
       app_bar_row_2_internal);
@@ -128,12 +129,16 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
 
   auto * title_label_row_2_internal = new QLabel();
   title_label_row_2_internal->setProperty("class", "app_bar_title_label");
-  title_label_row_2_internal->setText(config.title);
+  title_label_row_2_internal->setText(config_.title);
   app_bar_row_2_internal->addWidget(title_label_row_2_internal);
 }
 
 AppBar::~AppBar() {
-  qInfo() << "[M3QW Frontend] AppBar: App Bar is being deleted.";
+  qInfo() << "[ OK ] M3QW AppBar: App Bar is being deleted.";
+}
+
+AppBarConfig AppBar::GetConfig() {
+  return config_;
 }
 
 }  // namespace components

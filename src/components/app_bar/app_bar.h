@@ -46,9 +46,11 @@ class AppBar: public QWidget {
  public:
   explicit AppBar(const AppBarConfig &config, QWidget *parent = nullptr);
   ~AppBar();
+  AppBarConfig GetConfig();
 
  private:
   QString class_name_;
+  AppBarConfig config_;
 };
 
 }  // namespace components
