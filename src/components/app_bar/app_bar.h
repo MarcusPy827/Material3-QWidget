@@ -20,6 +20,7 @@
 
 #include <QWidget>
 #include <QList>
+#include <QLabel>
 
 #include "components/app_bar/app_bar_icon_btn.h"
 
@@ -47,10 +48,15 @@ class AppBar: public QWidget {
   explicit AppBar(const AppBarConfig &config, QWidget *parent = nullptr);
   ~AppBar();
   AppBarConfig GetConfig();
+  QString GetTitle();
+  void SetTitle(const QString &title);
 
  private:
   QString class_name_;
   AppBarConfig config_;
+
+  QLabel * title_label_row_1_internal = nullptr;
+  QLabel * title_label_row_2_internal = nullptr;
 };
 
 }  // namespace components

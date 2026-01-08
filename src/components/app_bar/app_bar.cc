@@ -99,13 +99,15 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
     app_bar_row_1_internal->addSpacerItem(leading_icon_btn_padding);
   }
 
-  auto * title_label_internal = new QLabel();
-  title_label_internal->setProperty("class", "app_bar_title_label");
-  title_label_internal->setText(config_.title);
-  if (config_.size != AppBarSize::kSmall) {
-    title_label_internal->hide();
+  if (title_label_row_1_internal == nullptr) {
+    title_label_row_1_internal = new QLabel();
   }
-  app_bar_row_1_internal->addWidget(title_label_internal);
+  title_label_row_1_internal->setProperty("class", "app_bar_title_label");
+  title_label_row_1_internal->setText(config_.title);
+  if (config_.size != AppBarSize::kSmall) {
+    title_label_row_1_internal->hide();
+  }
+  app_bar_row_1_internal->addWidget(title_label_row_1_internal);
 
   QSpacerItem * title_trailing_spacer_internal = new QSpacerItem(48, 48,
     QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -127,7 +129,9 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
       app_bar_row_2_internal);
   }
 
-  auto * title_label_row_2_internal = new QLabel();
+  if (title_label_row_2_internal == nullptr) {
+    title_label_row_2_internal = new QLabel();
+  }
   title_label_row_2_internal->setProperty("class", "app_bar_title_label");
   title_label_row_2_internal->setText(config_.title);
   app_bar_row_2_internal->addWidget(title_label_row_2_internal);
@@ -139,6 +143,16 @@ AppBar::~AppBar() {
 
 AppBarConfig AppBar::GetConfig() {
   return config_;
+}
+
+QString AppBar::GetTitle() {
+  return config_.title;
+}
+
+void AppBar::SetTitle(const QString &title) {
+  config_.title = title;
+  title_label_row_1_internal->setText(title);
+  title_label_row_2_internal->setText(title);
 }
 
 }  // namespace components
