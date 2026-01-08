@@ -38,6 +38,7 @@ struct AppBarConfig {
   AppBarSize size = AppBarSize::kSmall;
   AppBarIconBtn * leading_icon_btn = nullptr;
   QString title = "";
+  QString subtitle = "";
   QList<AppBarIconBtn *> trailing_icon_btns = {};
 };
 
@@ -50,13 +51,17 @@ class AppBar: public QWidget {
   AppBarConfig GetConfig();
   QString GetTitle();
   void SetTitle(const QString &title);
+  QString GetSubtitle();
+  void SetSubtitle(const QString &subtitle);
 
  private:
   QString class_name_;
   AppBarConfig config_;
 
   QLabel * title_label_row_1_internal = nullptr;
+  QLabel * subtitle_label_row_1_internal = nullptr;
   QLabel * title_label_row_2_internal = nullptr;
+  QLabel * subtitle_label_row_2_internal = nullptr;
 };
 
 }  // namespace components

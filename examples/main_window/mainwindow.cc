@@ -62,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     .size = components::AppBarSize::kSmall,
     .leading_icon_btn = app_bar_menu_icon_btn,
     .title = tr("Material3-QWidget Example"),
+    .subtitle = tr("Home"),
     .trailing_icon_btns = {app_bar_more_icon_btn}
   };
   components::AppBar * app_bar = new components::AppBar(app_bar_config, this);

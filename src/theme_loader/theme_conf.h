@@ -100,9 +100,16 @@ static QString GetAppBarTitleStyle(interfaces::ColorPalette palette) {
       QWidget[class='app_bar_title_label'] {
         color: %t1%;
         font-size: 24px;
-        min-height: 32px;
-        max-height: 32px;
       })"""), QList<QString>{palette.kOnSurface});
+}
+
+static QString GetAppBarSubtitleStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_bar_subtitle_label'] {
+        color: %t1%;
+        font-size: 12px;
+      })"""), QList<QString>{palette.kOnSurfaceVariant});
 }
 
 static QString GetAppBarIconBtnStyle(interfaces::ColorPalette palette) {
@@ -137,6 +144,7 @@ static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
       + GetMediumAppBarBaseStyle(conf.light)
       + GetLargeAppBarBaseStyle(conf.light)
       + GetAppBarTitleStyle(conf.light)
+      + GetAppBarSubtitleStyle(conf.light)
       + GetAppBarIconBtnStyle(conf.light),
     GetAppBackground(conf.dark)
       + GetSearchAppBarBaseStyle(conf.dark)
@@ -144,6 +152,7 @@ static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
       + GetMediumAppBarBaseStyle(conf.dark)
       + GetLargeAppBarBaseStyle(conf.dark)
       + GetAppBarTitleStyle(conf.dark)
+      + GetAppBarSubtitleStyle(conf.dark)
       + GetAppBarIconBtnStyle(conf.dark)
   };
 }
