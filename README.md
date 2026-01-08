@@ -8,9 +8,9 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-[简体中文](!README.zh.md) | English
+[简体中文](./docs/readme/README.zh.md) | English
 
-**README VERSION** 0.9.2
+**README VERSION** 0.9.3
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -89,8 +89,6 @@ Here are the feature of this library:
 
 
 ### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * ![Static Badge](https://img.shields.io/badge/Qt-6.9.3-green?style=flat-square&logo=qt&logoColor=green&link=qt.io)
 * ![Static Badge](https://img.shields.io/badge/C%2B%2B-20-blue?style=flat-square&logo=C%2B%2B&logoColor=blue&link=https%3A%2F%2Fen.cppreference.com%2Fw%2Fcpp%2F20.html)
@@ -182,7 +180,7 @@ Hence, in the example above, the port is `5173`.
   * [ ] Icon buttons (*Up next*)
   * [ ] ...
 * Docs
-  * [ ] README (*Work in progress*)
+  * [x] README
   * [ ] Document site (*Planned*)
   * [ ] Example program (*Work in progress*)
 * I18N
