@@ -12,7 +12,6 @@
 
 **README VERSION** 0.9
 
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -21,23 +20,15 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-<--
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![Unlicense License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
--->
+![Static Badge](https://img.shields.io/badge/Qt-Target%20version%206.9.3-green?style=flat-square&logo=qt&link=qt.io) ![Static Badge](https://img.shields.io/badge/C%2B%2B%20standard-20-blue?style=flat-square&logo=c%2B%2B&link=https%3A%2F%2Fen.cppreference.com%2Fw%2Fcpp%2F20.html) ![Static Badge](https://img.shields.io/badge/Version-0.9-yellow?style=flat-square) ![Static Badge](https://img.shields.io/badge/Made%20with-love-red?style=flat-square)
 
 
 
 <!-- PROJECT LOGO -->
 <br />
+
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+
 
   <h3 align="center">Material3-QWidget</h3>
 
@@ -83,7 +74,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Screen Shot][product-screenshot]](./docs/readme/screenshots/screenshots.png)
+![Screen Shot](./docs/readme/screenshots/screenshots.png)
 
 Welcome to Material3-QWidget, this is my side project trying to make a UI component library for QWidget that mimics Google's Material Design 3 Style.
 
