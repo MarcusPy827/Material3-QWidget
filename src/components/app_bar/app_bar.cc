@@ -101,6 +101,9 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   auto * title_label_internal = new QLabel();
   title_label_internal->setProperty("class", "app_bar_title_label");
   title_label_internal->setText(config.title);
+  if (config.size != AppBarSize::kSmall) {
+    title_label_internal->hide();
+  }
   app_bar_row_1_internal->addWidget(title_label_internal);
 
   QSpacerItem * title_trailing_spacer_internal = new QSpacerItem(48, 48,
@@ -112,6 +115,21 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
       app_bar_row_1_internal->addWidget(btn);
     }
   }
+
+  auto * app_bar_row_2_internal = new QHBoxLayout();
+  app_bar_row_2_internal->setContentsMargins(16, 0, 16, 0);
+  app_bar_row_2_internal->setSpacing(0);
+  app_bar_row_2_internal->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+  if (config.size == AppBarSize::kMedium || config.size ==
+      AppBarSize::kLarge) {
+    app_bar_container_multirow_layout_internal->addLayout(
+      app_bar_row_2_internal);
+  }
+
+  auto * title_label_row_2_internal = new QLabel();
+  title_label_row_2_internal->setProperty("class", "app_bar_title_label");
+  title_label_row_2_internal->setText(config.title);
+  app_bar_row_2_internal->addWidget(title_label_row_2_internal);
 }
 
 AppBar::~AppBar() {
