@@ -1,0 +1,64 @@
+@import url('../app.css');
+
+.app-bar {
+  color: var(--on-app-bar);
+  background-color: var(--app-bar-bg);
+  min-height: 64px;
+  max-height: 64px;
+  width: calc(100vw - 32px);
+  padding: 16px;
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.app-bar-icon-btn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  margin-right: 16px;
+}
+
+.app-bar-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border: 0px solid rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+}
+
+.app-bar-icon-btn:active {
+  background: rgba(0, 0, 0, 0.1);
+  border: 0px solid rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+}
+
+.app-shell {
+  width: 100vw;
+  height: calc(100% - 96px);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.app-drawer {
+  color: var(--on-docs);
+  width: calc(24vw - 32px);
+  height: calc(100% - 32px);
+  padding: 16px;
+  font-size: 16px;
+  border-right: 1px solid var(--app-drawer-border);
+}

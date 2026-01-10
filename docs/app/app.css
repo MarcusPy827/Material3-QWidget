@@ -1,0 +1,37 @@
+/* Palette config */
+/* Just color palette from Nord */
+:root {
+  --doc-bg: #eceff4;
+  --on-docs: #4c566a;
+  --app-bar-bg: #e5e9f0;
+  --on-app-bar: #8fbcbb;
+  --app-drawer-border: #8fbcbb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --doc-bg: #434c5e;
+    --on-docs: #eceff4;
+    --app-bar-bg: #4c566a;
+    --on-app-bar: #8fbcbb;
+    --app-drawer-border: #8fbcbb;
+  }
+}
+
+/* Root HTML config */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--doc-bg);
+}
+
+/* Basic attributes */
+.no-select {
+  user-select: none;
+}
+
+.hide {
+  display: none;
+}
