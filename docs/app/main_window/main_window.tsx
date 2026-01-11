@@ -1,24 +1,49 @@
-import { useState, type JSX } from "react";
-import "material-symbols";
-import "./main_window.css";
+import { useEffect, useState, type JSX } from "react";
+import { useTranslation } from 'react-i18next';
+
+import pkg from '@arco-design/web-react';
+import "@arco-design/web-react/dist/css/arco.css";
+
+const { PageHeader } = pkg;
 
 export default function MainWindow(): JSX.Element {
+  const { t } = useTranslation();
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+
+  useEffect(() => {
+    const isDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleThemeSwitch = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) {
+        document.body.setAttribute('arco-theme', 'dark');
+      } else {
+        document.body.removeAttribute('arco-theme');
+      }
+    };
+    handleThemeSwitch(isDarkTheme);
+    isDarkTheme.addEventListener('change', handleThemeSwitch);
+    return () => {
+      isDarkTheme.removeEventListener('change', handleThemeSwitch);
+    };
+  }, []);
+
+  const [breadcrumbRoutes, setBreadcrumbRoutes] = useState([
+    {
+      path: '/',
+      breadcrumbName: 'Home',
+    }
+  ]);
+  const [chapterTitle, setChapterTitle] = useState('Home');
+
   return (
     <>
-      <div className="app-bar">
-        <div className="app-bar-icon-btn" onClick={toggleDrawer}>
-          <span className="material-symbols-rounded no-select">menu</span>
-        </div>
-        <b>Material3-QWidget Docs</b>
-      </div>
-
-      <div className="app-shell">
-        <div className={`app-drawer ${isDrawerOpen ? "" : "hide"}`}>
-          
-        </div>
-      </div>
+      <PageHeader
+        style={{ background: 'var(--color-bg-2)' }}
+        title={t('%website_title%')}
+        subTitle={chapterTitle}
+        breadcrumb={{routes: breadcrumbRoutes}}
+        extra={<></>}
+      ></PageHeader>
     </>
   );
 }
