@@ -10,7 +10,7 @@
 
 [简体中文](./docs/readme/README.zh.md) | English
 
-**README VERSION** 0.9.3
+**README VERSION** 0.9.4
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -175,9 +175,10 @@ Hence, in the example above, the port is `5173`.
   * [x] Icon loader
   * [x] Default palette (will be updated while introducing new components...)
 * Components
-  * [ ] App bar (*Work in progress*)
+  * [x] App bar
   * [x] App bar Icon buttons
-  * [ ] Icon buttons (*Up next*)
+  * [ ] Navigation drawer (*Work in progress*)
+  * [ ] Icon buttons (*Sorry, it's delayed*)
   * [ ] ...
 * Docs
   * [x] README
