@@ -27,12 +27,16 @@ interfaces::ColorPalette default_light_palette = {
   "#F6FAFE",  // kBackground
   "#EBEEF3",  // kSurfaceContainer
   "#181C20",  // kOnSurface
+  "#41484D",  // kOnSurfaceVariant
+  "#FFFFFF",  // kSurfaceContainerLowest
 };
 
 interfaces::ColorPalette default_dark_palette = {
   "#101417",  // kBackground
   "#1C2024",  // kSurfaceContainer
   "#DFE3E7",  // kOnSurface
+  "#C1C7CE",  // kOnSurfaceVariant
+  "#0A0F12",  // kSurfaceContainerLowest
 };
 
 interfaces::ColorConfig default_color_config = {

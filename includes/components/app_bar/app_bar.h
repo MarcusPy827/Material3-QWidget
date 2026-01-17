@@ -20,6 +20,8 @@
 
 #include <QWidget>
 #include <QList>
+#include <QLabel>
+#include <QLineEdit>
 
 #include "components/app_bar/app_bar_icon_btn.h"
 
@@ -37,7 +39,11 @@ struct AppBarConfig {
   AppBarSize size = AppBarSize::kSmall;
   AppBarIconBtn * leading_icon_btn = nullptr;
   QString title = "";
+  QString subtitle = "";
   QList<AppBarIconBtn *> trailing_icon_btns = {};
+  QString search_bar_placeholder_text = "";
+  QString search_bar_icon = "";
+  utils::IconVariant search_bar_icon_variant = utils::IconVariant::kRounded;
 };
 
 class AppBar: public QWidget {
@@ -46,9 +52,24 @@ class AppBar: public QWidget {
  public:
   explicit AppBar(const AppBarConfig &config, QWidget *parent = nullptr);
   ~AppBar();
+  AppBarConfig GetConfig();
+  QString GetTitle();
+  void SetTitle(const QString &title);
+  QString GetSubtitle();
+  void SetSubtitle(const QString &subtitle);
+  QLineEdit * GetSearchBar();
+  AppBarIconBtn * GetSearchBarBtn();
 
  private:
   QString class_name_;
+  AppBarConfig config_;
+
+  QLabel * title_label_row_1_internal_ = nullptr;
+  QLabel * subtitle_label_row_1_internal_ = nullptr;
+  QLabel * title_label_row_2_internal_ = nullptr;
+  QLabel * subtitle_label_row_2_internal_ = nullptr;
+  QLineEdit * search_bar_internal_ = nullptr;
+  AppBarIconBtn * search_bar_icon_btn_internal_ = nullptr;
 };
 
 }  // namespace components
