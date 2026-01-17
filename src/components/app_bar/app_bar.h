@@ -63,10 +63,10 @@ class AppBar: public QWidget {
   QString class_name_;
   AppBarConfig config_;
 
-  QLabel * title_label_row_1_internal = nullptr;
-  QLabel * subtitle_label_row_1_internal = nullptr;
-  QLabel * title_label_row_2_internal = nullptr;
-  QLabel * subtitle_label_row_2_internal = nullptr;
+  QLabel * title_label_row_1_internal_ = nullptr;
+  QLabel * subtitle_label_row_1_internal_ = nullptr;
+  QLabel * title_label_row_2_internal_ = nullptr;
+  QLabel * subtitle_label_row_2_internal_ = nullptr;
   QLineEdit * search_bar_internal_ = nullptr;
 };
 

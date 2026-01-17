@@ -113,28 +113,28 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   titles_row_1_layout_internal->setSpacing(0);
   app_bar_row_1_internal->addLayout(titles_row_1_layout_internal);
 
-  if (title_label_row_1_internal == nullptr) {
-    title_label_row_1_internal = new QLabel();
+  if (title_label_row_1_internal_ == nullptr) {
+    title_label_row_1_internal_ = new QLabel();
   }
-  title_label_row_1_internal->setProperty("class", "app_bar_title_label");
-  title_label_row_1_internal->setText(config_.title);
+  title_label_row_1_internal_->setProperty("class", "app_bar_title_label");
+  title_label_row_1_internal_->setText(config_.title);
   if (config_.size != AppBarSize::kSmall) {
-    title_label_row_1_internal->hide();
+    title_label_row_1_internal_->hide();
   }
-  titles_row_1_layout_internal->addWidget(title_label_row_1_internal);
+  titles_row_1_layout_internal->addWidget(title_label_row_1_internal_);
 
-  if (subtitle_label_row_1_internal == nullptr) {
-    subtitle_label_row_1_internal = new QLabel();
+  if (subtitle_label_row_1_internal_ == nullptr) {
+    subtitle_label_row_1_internal_ = new QLabel();
   }
-  subtitle_label_row_1_internal->setProperty("class", "app_bar_subtitle_label");
-  subtitle_label_row_1_internal->setText(config_.subtitle);
+  subtitle_label_row_1_internal_->setProperty("class", "app_bar_subtitle_label");
+  subtitle_label_row_1_internal_->setText(config_.subtitle);
   if (config_.size != AppBarSize::kSmall) {
-    subtitle_label_row_1_internal->hide();
+    subtitle_label_row_1_internal_->hide();
   }
   if (config_.subtitle.isEmpty()) {
-    subtitle_label_row_1_internal->hide();
+    subtitle_label_row_1_internal_->hide();
   }
-  titles_row_1_layout_internal->addWidget(subtitle_label_row_1_internal);
+  titles_row_1_layout_internal->addWidget(subtitle_label_row_1_internal_);
 
   if (config_.size == AppBarSize::kSearch) {
     if (!config_.title.isEmpty()) {
@@ -182,23 +182,23 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   titles_row_2_layout_internal->setSpacing(4);
   app_bar_row_2_internal->addLayout(titles_row_2_layout_internal);
 
-  if (title_label_row_2_internal == nullptr) {
-    title_label_row_2_internal = new QLabel();
+  if (title_label_row_2_internal_ == nullptr) {
+    title_label_row_2_internal_ = new QLabel();
   }
-  title_label_row_2_internal->setProperty("class", "app_bar_title_label");
-  title_label_row_2_internal->setText(config_.title);
-  titles_row_2_layout_internal->addWidget(title_label_row_2_internal);
+  title_label_row_2_internal_->setProperty("class", "app_bar_title_label");
+  title_label_row_2_internal_->setText(config_.title);
+  titles_row_2_layout_internal->addWidget(title_label_row_2_internal_);
 
-  if (subtitle_label_row_2_internal == nullptr) {
-    subtitle_label_row_2_internal = new QLabel();
+  if (subtitle_label_row_2_internal_ == nullptr) {
+    subtitle_label_row_2_internal_ = new QLabel();
   }
-  subtitle_label_row_2_internal->setProperty("class",
+  subtitle_label_row_2_internal_->setProperty("class",
     "app_bar_subtitle_label");
-  subtitle_label_row_2_internal->setText(config_.subtitle);
+  subtitle_label_row_2_internal_->setText(config_.subtitle);
   if (config_.subtitle.isEmpty()) {
-    subtitle_label_row_2_internal->hide();
+    subtitle_label_row_2_internal_->hide();
   }
-  titles_row_2_layout_internal->addWidget(subtitle_label_row_2_internal);
+  titles_row_2_layout_internal->addWidget(subtitle_label_row_2_internal_);
 }
 
 AppBar::~AppBar() {
@@ -215,11 +215,11 @@ QString AppBar::GetTitle() {
 
 void AppBar::SetTitle(const QString &title) {
   config_.title = title;
-  if (title_label_row_1_internal != nullptr) {
-    title_label_row_1_internal->setText(title);
+  if (title_label_row_1_internal_ != nullptr) {
+    title_label_row_1_internal_->setText(title);
   }
-  if (title_label_row_2_internal != nullptr) {
-    title_label_row_2_internal->setText(title);
+  if (title_label_row_2_internal_ != nullptr) {
+    title_label_row_2_internal_->setText(title);
   }
 }
 
@@ -229,15 +229,15 @@ QString AppBar::GetSubtitle() {
 
 void AppBar::SetSubtitle(const QString &subtitle) {
   config_.subtitle = subtitle;
-  if (subtitle_label_row_1_internal != nullptr) {
-    subtitle_label_row_1_internal->setText(subtitle);
+  if (subtitle_label_row_1_internal_ != nullptr) {
+    subtitle_label_row_1_internal_->setText(subtitle);
   }
-  if (subtitle_label_row_2_internal != nullptr) {
-    subtitle_label_row_2_internal->setText(subtitle);
+  if (subtitle_label_row_2_internal_ != nullptr) {
+    subtitle_label_row_2_internal_->setText(subtitle);
   }
   if (config_.subtitle.isEmpty()) {
-    subtitle_label_row_1_internal->hide();
-    subtitle_label_row_2_internal->hide();
+    subtitle_label_row_1_internal_->hide();
+    subtitle_label_row_2_internal_->hide();
   }
 }
 
