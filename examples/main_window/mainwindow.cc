@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     .title = tr("Material3-QWidget Example"),
     .subtitle = tr("Home"),
     .trailing_icon_btns = {app_bar_more_icon_btn},
-    .search_bar_text = tr("Search..."),
+    .search_bar_placeholder_text = tr("Search..."),
     .search_bar_icon = "search",
     .search_bar_icon_variant = utils::IconVariant::kRounded
   };

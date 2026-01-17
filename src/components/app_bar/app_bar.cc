@@ -148,7 +148,8 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
         << "subtitle is NOT supported here. Provided subtitle will be ignored.";
     }
 
-    search_bar_internal_->setPlaceholderText(config_.search_bar_text);
+    search_bar_internal_->setPlaceholderText(
+      config_.search_bar_placeholder_text);
     titles_row_1_layout_internal->addWidget(search_bar_internal_);
   }
 

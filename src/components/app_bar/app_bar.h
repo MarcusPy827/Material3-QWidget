@@ -41,7 +41,7 @@ struct AppBarConfig {
   QString title = "";
   QString subtitle = "";
   QList<AppBarIconBtn *> trailing_icon_btns = {};
-  QString search_bar_text = "";
+  QString search_bar_placeholder_text = "";
   QString search_bar_icon = "";
   utils::IconVariant search_bar_icon_variant = utils::IconVariant::kRounded;
 };
