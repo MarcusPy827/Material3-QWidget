@@ -126,7 +126,8 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   if (subtitle_label_row_1_internal_ == nullptr) {
     subtitle_label_row_1_internal_ = new QLabel();
   }
-  subtitle_label_row_1_internal_->setProperty("class", "app_bar_subtitle_label");
+  subtitle_label_row_1_internal_->setProperty("class",
+    "app_bar_subtitle_label");
   subtitle_label_row_1_internal_->setText(config_.subtitle);
   if (config_.size != AppBarSize::kSmall) {
     subtitle_label_row_1_internal_->hide();
@@ -147,7 +148,7 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
         << "subtitle is NOT supported here. Provided subtitle will be ignored.";
     }
 
-    search_bar_internal_->setText(config_.search_bar_text);
+    search_bar_internal_->setPlaceholderText(config_.search_bar_text);
     titles_row_1_layout_internal->addWidget(search_bar_internal_);
   }
 
