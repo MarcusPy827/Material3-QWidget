@@ -59,11 +59,14 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     components::AppBarIconBtn(app_bar_more_icon_config, nullptr);
 
   const auto & app_bar_config = components::AppBarConfig{
-    .size = components::AppBarSize::kLarge,
+    .size = components::AppBarSize::kSearch,
     .leading_icon_btn = app_bar_menu_icon_btn,
     .title = tr("Material3-QWidget Example"),
     .subtitle = tr("Home"),
-    .trailing_icon_btns = {app_bar_more_icon_btn}
+    .trailing_icon_btns = {app_bar_more_icon_btn},
+    .search_bar_text = tr("Search..."),
+    .search_bar_icon = "search",
+    .search_bar_icon_variant = utils::IconVariant::kRounded
   };
   components::AppBar * app_bar = new components::AppBar(app_bar_config, this);
   main_layout->addWidget(app_bar);

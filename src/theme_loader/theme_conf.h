@@ -136,6 +136,24 @@ static QString GetAppBarIconBtnStyle(interfaces::ColorPalette palette) {
       utils::Utils::ApplyOpacityToHexColor(palette.kOnSurface, 0.1)});
 }
 
+static QString GetAppBarSearchBarStyle(interfaces::ColorPalette palette) {
+  return utils::Utils::TemplateCat(
+    QStringLiteral(R"""(
+      QLineEdit[class='app_bar_search_bar'] {
+        color: %t1%;
+        background: %t2%;
+        border: 0px solid %t2%;
+        border-radius: 28px;
+        height: 56px;
+        padding-left: 28px;
+        padding-right: 28px;
+        font-size: 16px;
+        })"""), QList<QString>{
+        palette.kOnSurfaceVariant,
+        palette.kSurfaceContainerLowest
+      });
+}
+
 static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
   return {
     GetAppBackground(conf.light)
@@ -145,7 +163,8 @@ static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
       + GetLargeAppBarBaseStyle(conf.light)
       + GetAppBarTitleStyle(conf.light)
       + GetAppBarSubtitleStyle(conf.light)
-      + GetAppBarIconBtnStyle(conf.light),
+      + GetAppBarIconBtnStyle(conf.light)
+      + GetAppBarSearchBarStyle(conf.light),
     GetAppBackground(conf.dark)
       + GetSearchAppBarBaseStyle(conf.dark)
       + GetSmallAppBarBaseStyle(conf.dark)
@@ -154,6 +173,7 @@ static StyleTuple GetThemeMap(interfaces::ColorConfig conf) {
       + GetAppBarTitleStyle(conf.dark)
       + GetAppBarSubtitleStyle(conf.dark)
       + GetAppBarIconBtnStyle(conf.dark)
+      + GetAppBarSearchBarStyle(conf.dark)
   };
 }
 

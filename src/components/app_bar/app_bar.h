@@ -21,6 +21,7 @@
 #include <QWidget>
 #include <QList>
 #include <QLabel>
+#include <QLineEdit>
 
 #include "components/app_bar/app_bar_icon_btn.h"
 
@@ -40,6 +41,9 @@ struct AppBarConfig {
   QString title = "";
   QString subtitle = "";
   QList<AppBarIconBtn *> trailing_icon_btns = {};
+  QString search_bar_text = "";
+  QString search_bar_icon = "";
+  utils::IconVariant search_bar_icon_variant = utils::IconVariant::kRounded;
 };
 
 class AppBar: public QWidget {
@@ -53,6 +57,7 @@ class AppBar: public QWidget {
   void SetTitle(const QString &title);
   QString GetSubtitle();
   void SetSubtitle(const QString &subtitle);
+  QLineEdit * GetSearchBar();
 
  private:
   QString class_name_;
@@ -62,6 +67,7 @@ class AppBar: public QWidget {
   QLabel * subtitle_label_row_1_internal = nullptr;
   QLabel * title_label_row_2_internal = nullptr;
   QLabel * subtitle_label_row_2_internal = nullptr;
+  QLineEdit * search_bar_internal_ = nullptr;
 };
 
 }  // namespace components

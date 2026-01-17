@@ -27,7 +27,7 @@ namespace loader {
 ThemeLoader::ThemeLoader(QWidget * base_layer, interfaces::ColorConfig
     palette, QWidget * parent) {
   if (base_layer == nullptr) {
-    qCritical() << "[M3QW] Theme Loader: No valid base layer."
+    qCritical() << "[ERROR] Theme Loader: No valid base layer."
       << "Skipping loading styles...";
     return;
   }
@@ -39,7 +39,7 @@ ThemeLoader::ThemeLoader(QWidget * base_layer, interfaces::ColorConfig
 
   connect(qApp->styleHints(), &QStyleHints::colorSchemeChanged, this,
       [this](Qt::ColorScheme scheme){
-    qInfo() << "[M3QW] Theme Loader: Detected color scheme has been"
+    qInfo() << "[INFO] Theme Loader: Detected color scheme has been"
       << "changed, now reloading theme...";
     LoadThemeFromMap(IsDarkMode());
   });
@@ -50,11 +50,11 @@ ThemeLoader::~ThemeLoader() {
 
 void ThemeLoader::LoadThemeFromMap(bool use_dark_mode) {
   if (install_target_ != nullptr) {
-    qInfo() << "[M3QW Frontend] Theme Loader: Loading selector styles...";
+    qInfo() << "[INFO] Theme Loader: Loading selector styles...";
     install_target_->setStyleSheet(use_dark_mode ? theme_map_.dark_style :
       theme_map_.light_style);
   } else {
-    qCritical() << "[M3QW Frontend] Theme Loader: No parent widget"
+    qCritical() << "[ERROR] Theme Loader: No parent widget"
       << "was specified during initialization. "
       << "Selector styles will not be loaded.";
   }

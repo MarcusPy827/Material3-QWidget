@@ -28,6 +28,7 @@ struct ColorPalette {
   QString kSurfaceContainer;
   QString kOnSurface;
   QString kOnSurfaceVariant;
+  QString kSurfaceContainerLowest;
 };
 
 struct ColorConfig {

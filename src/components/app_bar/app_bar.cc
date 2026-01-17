@@ -49,13 +49,22 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
     }
 
     default: {
-      qWarning() << "[M3QW] AppBar: Unknown AppBarSize provided."
+      qWarning() << "[WARN] AppBar: Unknown AppBarSize provided."
         << "Now defaulting to AppBarSize::kSmall...";
       class_name_ = "app_bar_container_small";
       break;
     }
   }
   this->setProperty("class", class_name_);
+
+  /* Note: Search bar is created no matter what AppBarSize is set to. 
+   * The reason to do this is that we may allow dynamic AppBarSize switching
+   * in the future.
+   */
+  search_bar_internal_ = new QLineEdit();
+  search_bar_internal_->setProperty("class", "app_bar_search_bar");
+  search_bar_internal_->setSizePolicy(QSizePolicy::Expanding,
+    QSizePolicy::Fixed);
 
   auto * app_bar_container_layout_internal = new QHBoxLayout();
   app_bar_container_layout_internal->setContentsMargins(0, 0, 0, 0);
@@ -127,8 +136,29 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   }
   titles_row_1_layout_internal->addWidget(subtitle_label_row_1_internal);
 
-  QSpacerItem * title_trailing_spacer_internal = new QSpacerItem(48, 48,
+  if (config_.size == AppBarSize::kSearch) {
+    if (!config_.title.isEmpty()) {
+      qWarning() << "[WARN] AppBar: App bar type is given to \"kSearch\","
+        << "title is NOT supported here. Provided title will be ignored.";
+    }
+
+    if (!config_.subtitle.isEmpty()) {
+      qWarning() << "[WARN] AppBar: App bar type is given to \"kSearch\","
+        << "subtitle is NOT supported here. Provided subtitle will be ignored.";
+    }
+
+    search_bar_internal_->setText(config_.search_bar_text);
+    titles_row_1_layout_internal->addWidget(search_bar_internal_);
+  }
+
+  QSpacerItem * title_trailing_spacer_internal = nullptr;
+  if (config_.size == AppBarSize::kSearch) {
+    title_trailing_spacer_internal = new QSpacerItem(8, 48,
+      QSizePolicy::Fixed, QSizePolicy::Fixed);
+  } else {
+    title_trailing_spacer_internal = new QSpacerItem(8, 48,
     QSizePolicy::Expanding, QSizePolicy::Fixed);
+  }
   app_bar_row_1_internal->addSpacerItem(title_trailing_spacer_internal);
 
   if (!config_.trailing_icon_btns.isEmpty()) {
@@ -172,7 +202,7 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
 }
 
 AppBar::~AppBar() {
-  qInfo() << "[ OK ] M3QW AppBar: App Bar is being deleted.";
+  qInfo() << "[ OK ] AppBar: App Bar is being deleted.";
 }
 
 AppBarConfig AppBar::GetConfig() {
@@ -209,6 +239,23 @@ void AppBar::SetSubtitle(const QString &subtitle) {
     subtitle_label_row_1_internal->hide();
     subtitle_label_row_2_internal->hide();
   }
+}
+
+QLineEdit * AppBar::GetSearchBar() {
+  if (config_.size != AppBarSize::kSearch) {
+    qWarning() << "[WARN] AppBar: Current AppBar mode is NOT of \"kSearch\","
+      << "even the search bar may still be generated, the users may NOT see"
+      << "the search bar.";
+  }
+
+  if (search_bar_internal_ == nullptr) {
+    qCritical() << "[ERROR] AppBar: Search bar is NOT initialized, please be"
+      << "aware that there are an incoming null pointer...";
+    return nullptr;
+  }
+
+  qInfo() << "[ OK ] AppBar: Successfully found the search bar pointer.";
+  return search_bar_internal_;
 }
 
 }  // namespace components
