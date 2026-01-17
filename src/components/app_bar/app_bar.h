@@ -58,6 +58,7 @@ class AppBar: public QWidget {
   QString GetSubtitle();
   void SetSubtitle(const QString &subtitle);
   QLineEdit * GetSearchBar();
+  AppBarIconBtn * GetSearchBarBtn();
 
  private:
   QString class_name_;
@@ -68,6 +69,7 @@ class AppBar: public QWidget {
   QLabel * title_label_row_2_internal_ = nullptr;
   QLabel * subtitle_label_row_2_internal_ = nullptr;
   QLineEdit * search_bar_internal_ = nullptr;
+  AppBarIconBtn * search_bar_icon_btn_internal_ = nullptr;
 };
 
 }  // namespace components

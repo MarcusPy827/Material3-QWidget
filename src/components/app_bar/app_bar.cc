@@ -16,6 +16,7 @@
  */
 
 #include <QHBoxLayout>
+#include <QGridLayout>
 #include <QStackedWidget>
 #include <QLabel>
 #include <QSpacerItem>
@@ -65,6 +66,14 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
   search_bar_internal_->setProperty("class", "app_bar_search_bar");
   search_bar_internal_->setSizePolicy(QSizePolicy::Expanding,
     QSizePolicy::Fixed);
+  search_bar_internal_->setVisible(false);
+  AppBarIconBtnConfig search_bar_icon_btn_config{
+    .icon_name = config_.search_bar_icon,
+    .icon_variant = config_.search_bar_icon_variant
+  };
+  search_bar_icon_btn_internal_ = new AppBarIconBtn(
+    search_bar_icon_btn_config);
+  search_bar_icon_btn_internal_->setVisible(false);
 
   auto * app_bar_container_layout_internal = new QHBoxLayout();
   app_bar_container_layout_internal->setContentsMargins(0, 0, 0, 0);
@@ -148,9 +157,33 @@ AppBar::AppBar(const AppBarConfig &config, QWidget *parent): QWidget(parent) {
         << "subtitle is NOT supported here. Provided subtitle will be ignored.";
     }
 
+    QGridLayout * search_bar_layout_internal = new QGridLayout();
+    search_bar_layout_internal->setContentsMargins(0, 0, 0, 0);
+    search_bar_layout_internal->setSpacing(0);
+    titles_row_1_layout_internal->addLayout(search_bar_layout_internal);
+
     search_bar_internal_->setPlaceholderText(
       config_.search_bar_placeholder_text);
-    titles_row_1_layout_internal->addWidget(search_bar_internal_);
+    search_bar_internal_->setVisible(true);
+    search_bar_layout_internal->addWidget(search_bar_internal_, 0, 0);
+
+    if (!config_.search_bar_icon.isEmpty()) {
+      QHBoxLayout * search_bar_icon_btn_layout_internal = new QHBoxLayout();
+      search_bar_icon_btn_layout_internal->setContentsMargins(0, 0, 0, 0);
+      search_bar_icon_btn_layout_internal->setSpacing(0);
+      search_bar_layout_internal->addLayout(
+        search_bar_icon_btn_layout_internal, 0, 0, Qt::AlignRight |
+          Qt::AlignVCenter);
+
+      search_bar_icon_btn_internal_->setVisible(true);
+      search_bar_icon_btn_layout_internal->addWidget(
+        search_bar_icon_btn_internal_);
+
+      QSpacerItem * search_bar_icon_btn_padding = new QSpacerItem(4, 1,
+        QSizePolicy::Fixed, QSizePolicy::Fixed);
+      search_bar_icon_btn_layout_internal->addSpacerItem(
+        search_bar_icon_btn_padding);
+    }
   }
 
   QSpacerItem * title_trailing_spacer_internal = nullptr;
@@ -256,8 +289,36 @@ QLineEdit * AppBar::GetSearchBar() {
     return nullptr;
   }
 
+  if (!search_bar_internal_->isVisible()) {
+    qWarning() << "[WARN] AppBar: Please be aware that currently the search"
+      << "bar is NOT visible to users.";
+  }
+
   qInfo() << "[ OK ] AppBar: Successfully found the search bar pointer.";
   return search_bar_internal_;
+}
+
+AppBarIconBtn * AppBar::GetSearchBarBtn() {
+  if (config_.size != AppBarSize::kSearch) {
+    qWarning() << "[WARN] AppBar: Current AppBar mode is NOT of \"kSearch\","
+      << "even the search bar button may still be generated, the users may NOT"
+      << "see the search bar icon button.";
+  }
+
+  if (search_bar_icon_btn_internal_ == nullptr) {
+    qCritical() << "[ERROR] AppBar: Search bar button is NOT initialized,"
+      << "please be aware that there are an incoming null pointer...";
+    return nullptr;
+  }
+
+  if (!search_bar_icon_btn_internal_->isVisible()) {
+    qWarning() << "[WARN] AppBar: Please be aware that currently the search"
+      << "bar icon button is NOT visible to users.";
+  }
+
+  qInfo() << "[ OK ] AppBar: Successfully found the search bar icon button"
+    << "pointer.";
+  return search_bar_icon_btn_internal_;
 }
 
 }  // namespace components
