@@ -1,7 +1,8 @@
 export default function getChineseTranslations() {
   return {
     translation: {
-      "%website_title%": "Material3-QWidget 文档",
+      '%website_subtitle%': '文档',
+      '%acticle_welcome%': '欢迎',
     }
   }
 }

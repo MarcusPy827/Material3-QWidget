@@ -3,8 +3,8 @@ build/*
 src/build/*
 
 # Docs dependency and autogen
-docs/node_modules/*
-docs/.react-router/*
+docs/site/node_modules/*
+docs/site/build/*
 
 # IDE config files
 .qtcreator/*

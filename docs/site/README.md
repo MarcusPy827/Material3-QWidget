@@ -7,9 +7,8 @@ Then, at the root directory of the project, run the following command:
 
 ```bash
 cd docs
-pnpm i
-pnpm approve-builds
-pnpm dev
+npm install
+npm run dev
 ```
 
 This will pull a local server up. The default address should be at [http://localhost:5173](http://localhost:5173).

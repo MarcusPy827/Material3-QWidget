@@ -1,7 +1,8 @@
 export default function getEnglishTranslations() {
   return {
     translation: {
-      "%website_title%": "Material3-QWidget Documentation",
+      '%website_subtitle%': 'Docs',
+      '%acticle_welcome%': 'Welcome',
     }
   }
 }

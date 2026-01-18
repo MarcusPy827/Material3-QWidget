@@ -1,0 +1,13 @@
+@use '@carbon/react';
+
+.main-with-sidebar {
+  margin-left: 16rem;
+  margin-top: 3rem;
+  padding: 64px;
+}
+
+.main-without-sidebar {
+  margin-left: 0rem;
+  margin-top: 3rem;
+  padding: 64px;
+}
