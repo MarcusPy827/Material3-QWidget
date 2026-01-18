@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Header, SkipToContent, HeaderMenuButton, HeaderName, SideNav, SideNavItems, SideNavLink } from '@carbon/react'
-import { Document } from '@carbon/icons-react'
+import { Header, SkipToContent, HeaderMenuButton, HeaderName, SideNav, SideNavMenu, SideNavMenuItem } from '@carbon/react'
+import { Concept, Document } from '@carbon/icons-react'
 import { useTranslation } from 'react-i18next'
 import './Navigation.scss'
 
@@ -28,11 +28,14 @@ function NavigationShell({ activeId, children }: { activeId?: string; children?:
         onSideNavBlur={() => setIsNavigationDrawerExpanded(!isNavigationDrawerExpanded)}
         href='#'
       >
-        <SideNavItems>
-          <SideNavLink renderIcon={Document} href='/' isActive={activeId === 'welcome'}>
-            {t('%acticle_welcome%')}
-          </SideNavLink>
-        </SideNavItems>
+        <SideNavMenu renderIcon={Concept} title={t('%category_quick_start%')} tabIndex={0}>
+          <SideNavMenuItem href='/' aria-current={activeId === 'welcome' ? 'page' : undefined}>
+              {t('%article_welcome%')}
+          </SideNavMenuItem>
+          <SideNavMenuItem href='/copying' aria-current={activeId === 'copying' ? 'page' : undefined}>
+              {t('%article_copying%')}
+          </SideNavMenuItem>
+        </SideNavMenu>
       </SideNav>
 
       <main 
